@@ -19,7 +19,7 @@ echo ##################################
 echo Step 1: Update
 echo ##################################
 sudo apt-get -y update
-sudo apt-get -y upgrade
+sudo DEBIAN_FRONTEND=noninteractive apt-get -yq upgrade
 
 echo ##################################
 echo Step 2: Install MySQL
@@ -154,6 +154,7 @@ sudo service nginx reload
 echo ##################################
 echo  Finally: Clean
 echo ##################################
+sudo apt-get -y autoclean
 sudo apt-get -y autoremove
 
 echo "Redmine is installed and can be found at www.$DOMAIN_NAME"
