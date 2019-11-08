@@ -182,4 +182,4 @@ echo ##################################
 sudo apt-get -y autoclean
 sudo apt-get -y autoremove
 
-echo "Redmine is installed and can be found at www.$DOMAIN_NAME"
+echo "Redmine is installed and can be found at https://$DOMAIN_NAME"
