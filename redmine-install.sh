@@ -19,8 +19,8 @@ isValidEmail="^[a-z0-9!#\$%&'*+/=?^_\`{|}~-]+(\.[a-z0-9!#$%&'*+/=?^_\`{|}~-]+)*@
 echo "--------------------------------------"
 echo "  Setting up Redmine"
 echo "--------------------------------------"
-echo "  IP: 		      $IP"
-echo "  Domain name: 	$DOMAIN_NAME"
+echo "  IP:           $IP"
+echo "  Domain name:  $DOMAIN_NAME"
 echo "  Email:        $EMAIL"
 echo "--------------------------------------"
 
