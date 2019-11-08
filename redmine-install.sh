@@ -17,7 +17,7 @@ if [[ -z $1 ]]; then
   exit 1;
   
   # Validate provided email
-  sValidEmail="^[a-z0-9!#\$%&'*+/=?^_\`{|}~-]+(\.[a-z0-9!#$%&'*+/=?^_\`{|}~-]+)*@([a-z0-9]([a-z0-9-]*[a-z0-9])?\.)+[a-z0-9]([a-z0-9-]*[a-z0-9])?\$" 
+  isValidEmail="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$" 
   if [[ ! $1 =~ $isValidEmail ]]; then 
     echo "The email is invalid";
     exit 1;
