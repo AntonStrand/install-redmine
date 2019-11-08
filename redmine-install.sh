@@ -27,6 +27,8 @@ ROOT_PASSWORD=$(cat /dev/urandom | LC_CTYPE=C tr -dc 'a-zA-Z0-9' | fold -w 32 | 
 IP=$(dig +short myip.opendns.com @resolver1.opendns.com)
 DOMAIN_NAME=$(sed 's/.\{1\}$//' <<< $(dig +short -x $IP))
 
+clear
+
 echo "--------------------------------------"
 echo "  Setting up Redmine"
 echo "--------------------------------------"
