@@ -5,26 +5,27 @@
 # author Anton Strand
 # 2019-10-18
 
+# Check if email is provided
+if [[ -z $1 ]]; then
+  echo "You need to provide an email address for creating a SSL cert"
+  exit 1;
+fi
+
+# Validate provided email
+isValidEmail="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$" 
+if [[ ! $1 =~ $isValidEmail ]]; then 
+  echo "The email is invalid";
+  exit 1;
+fi
+
+# Save provided email
+EMAIL=$1
 # Generate password for database
 PASSWORD=$(cat /dev/urandom | LC_CTYPE=C tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
 ROOT_PASSWORD=$(cat /dev/urandom | LC_CTYPE=C tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
+# Get IP and domain name
 IP=$(dig +short myip.opendns.com @resolver1.opendns.com)
 DOMAIN_NAME=$(sed 's/.\{1\}$//' <<< $(dig +short -x $IP))
-
-# Check if email is provided
-if [[ -z $1 ]]; then
-  echo "You need to provide an email address for creating SSL cert"
-  exit 1;
-  
-  # Validate provided email
-  isValidEmail="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$" 
-  if [[ ! $1 =~ $isValidEmail ]]; then 
-    echo "The email is invalid";
-    exit 1;
-  fi
-fi
-
-EMAIL=$1
 
 echo "--------------------------------------"
 echo "  Setting up Redmine"
