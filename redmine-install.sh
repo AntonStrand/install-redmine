@@ -35,6 +35,9 @@ echo "  Domain name:  $DOMAIN_NAME"
 echo "  Email:        $EMAIL"
 echo "--------------------------------------"
 
+# allow time for reading the settings above
+sleep 2
+
 echo ##################################
 echo Step 1: Update
 echo ##################################
