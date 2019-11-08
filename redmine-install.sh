@@ -10,6 +10,7 @@ PASSWORD=$(cat /dev/urandom | LC_CTYPE=C tr -dc 'a-zA-Z0-9' | fold -w 32 | head 
 ROOT_PASSWORD=$(cat /dev/urandom | LC_CTYPE=C tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
 IP=$(dig +short myip.opendns.com @resolver1.opendns.com)
 DOMAIN_NAME=$(sed 's/.\{1\}$//' <<< $(dig +short -x $IP))
+EMAIL=$([[ -z $1 ]] && echo "You need to provide an email address for creating SSL cert"; exit 1; || echo $1)
 
 echo "Setting up Redmine"
 echo "IP: 		$IP"
@@ -105,7 +106,7 @@ echo  2. Install Certbot
 sudo apt-get -y install certbot python-certbot-nginx
 
 echo  3. Setup NGNIX
-sudo certbot --non-interactive --agree-tos -d $DOMAIN_NAME -m $1 --nginx
+sudo certbot --non-interactive --agree-tos -d $DOMAIN_NAME -m $EMAIL --nginx
 
 echo "# Redirect HTTP -> HTTPS
 server {
