@@ -11,10 +11,20 @@ ROOT_PASSWORD=$(cat /dev/urandom | LC_CTYPE=C tr -dc 'a-zA-Z0-9' | fold -w 32 | 
 IP=$(dig +short myip.opendns.com @resolver1.opendns.com)
 DOMAIN_NAME=$(sed 's/.\{1\}$//' <<< $(dig +short -x $IP))
 
-# Validate provided email
-EMAIL=$([[ -z $1 ]] && echo "You need to provide an email address for creating SSL cert"; exit 1; || echo $1)
-isValidEmail="^[a-z0-9!#\$%&'*+/=?^_\`{|}~-]+(\.[a-z0-9!#$%&'*+/=?^_\`{|}~-]+)*@([a-z0-9]([a-z0-9-]*[a-z0-9])?\.)+[a-z0-9]([a-z0-9-]*[a-z0-9])?\$"
-[[ ! $EMAIL =~ $isValidEmail ]]; && echo "The email is invalid"; exit 1;
+# Check if email is provided
+if [[ -z $1 ]]; then
+  echo "You need to provide an email address for creating SSL cert"
+  exit 1;
+  
+  # Validate provided email
+  sValidEmail="^[a-z0-9!#\$%&'*+/=?^_\`{|}~-]+(\.[a-z0-9!#$%&'*+/=?^_\`{|}~-]+)*@([a-z0-9]([a-z0-9-]*[a-z0-9])?\.)+[a-z0-9]([a-z0-9-]*[a-z0-9])?\$" 
+  if [[ ! $1 =~ $isValidEmail ]]; then 
+    echo "The email is invalid";
+    exit 1;
+  fi
+fi
+
+EMAIL=$1
 
 echo "--------------------------------------"
 echo "  Setting up Redmine"
